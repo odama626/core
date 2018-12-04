@@ -1,0 +1,139 @@
+.container {
+	color: $font-secondary;
+	text-align: left;
+	.input {
+		border: 1px solid $divider;
+		border-radius: $radius;
+		font-size: 18px;
+		line-height: 30px;
+		padding: 0 12px;
+		box-sizing: border-box;
+		max-width: 100%;
+		min-width: 100%;
+		min-height: 30px;
+	}
+
+	input::placeholder {
+		color: $font-secondary;
+	}
+
+	input:focus::placeholder {
+		color: transparent;
+	}
+
+	input:focus {
+		border: 2px solid $core-primary;
+	}
+
+
+	.label {
+		font-size: 14px;
+		margin-bottom: 7px;
+		margin-top: 7px;
+		color: $font-secondary;
+	}
+
+	.caption {
+		font-size: 12px;
+		margin-top: 7px;
+		padding: 0 12px;
+
+		// fix for HintInput
+		// prevent growing and shrinking when captions come and go
+		min-height: 1.286em;
+	}
+
+	&.valid, &.invalid, &.password, &.hasIcon {
+		.inputWrapper {
+			&:before:not([class^='icon-']):not([class*=' icon-']) {
+				
+				content: ' ';
+				transform: scaleY(0);
+				transform-origin: top;
+				opacity: 0;
+				pointer-events: none;
+				transition: transform 250ms ease, opacity 250ms ease;
+			}
+		}
+		&:not(.hasIcon) {
+			.inputWrapper:before {
+				transform: scaleY(1);
+				transform-origin: bottom;
+				opacity: 1;
+			}
+		}
+		.input {
+			padding-right: 25px;
+		}
+	}
+
+	&.valid, {
+		.inputWrapper {
+			&:not([class^='icon-']):not([class*=' icon-']) {
+				// @include icon($icon-validation-success-solid);
+			}
+			&:before {
+				color: $core-success;
+			}
+		}
+	}
+
+	&.invalid {
+		.inputWrapper {
+			&:not([class^='icon-']):not([class*=' icon-']) {
+				// @include icon($icon-validation-warning-circle-solid);
+			}
+			&:before {
+				color: $core-error;
+			}
+		}
+		.input {
+			border-color: $core-error;
+		}
+		.caption {
+			color: $core-error;
+		}
+	}
+
+	&.password {
+		.inputWrapper:not([class^='icon-']):not([class*=' icon-']) {
+			// @include icon($icon-menu-lock-close);
+		}
+		&.invalid {
+			.inputWrapper:not([class^='icon-']):not([class*=' icon-']) {
+				// @include icon($icon-menu-lock-open);
+			}
+		}
+
+		&.valid {
+			.inputWrapper:not([class^='icon-']):not([class*=' icon-']) {
+				// @include icon($icon-menu-lock-close);
+			}
+		}
+	}
+
+	.inputWrapper {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+
+		input {
+			width: 100%;
+			box-sizing: border-box;
+			background-color: transparent;
+			outline: none;
+			&:disabled {
+				// background-color: $smoke;
+			}
+		}
+
+		&:before {
+			pointer-events: none;
+			position: absolute;
+			right: 5px;
+			line-height: 30px !important;
+			font-size: 18px;
+			margin-top: 1px; // to account for top border of input
+		}
+	}
+}

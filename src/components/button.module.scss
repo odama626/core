@@ -1,0 +1,46 @@
+.container {
+  min-width: 64px;
+  line-height: 36px;
+  font-size: 14px;
+  background-position: center;
+  transition: background 0.8s ease-in-out;
+  color: $core-primary;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 0 16px;
+  box-sizing: border-box;
+  @include Clickable;
+
+  
+
+  // &:hover {
+  //   background: transparentize($core-primary, 0.92) radial-gradient(circle, transparent 1%, transparentize($core-primary, 0.92) 1%) center/15000%;
+  // }
+
+  // &:active {
+  //   background-color: transparentize($core-primary, 0.8);
+  //   background-size: 100%;
+  //   transition: background 0s;
+  // }
+}
+
+.text {
+  padding: 0 8px;
+  @include overlay($core-primary);
+}
+
+.contained {
+  background-color: $core-primary;
+  color: $core-on-primary;
+  @include overlay($core-primary, true);
+  // @include hover;
+}
+
+.outlined {
+  border: 1px solid rgba($core-on-surface, 0.12); 
+  @include overlay($core-primary);
+}

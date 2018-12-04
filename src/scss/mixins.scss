@@ -1,0 +1,39 @@
+@mixin overlay($color, $overlay: false) {
+  $multiplier: if($overlay, 2, 1);
+  & {
+    transition: background 450ms;
+    &:hover {
+      background: if($overlay, transparentize($color, $core-hover-opacity * $multiplier), rgba($color, $core-hover-opacity * $multiplier))
+        radial-gradient(circle, transparent 1%, if($overlay, transparentize($color, $core-focus-opacity * $multiplier), rgba($color, $core-focus-opacity * $multiplier)) 1%) center/15000%;
+    }
+    &:focus {
+      background-color: if($overlay, transparentize($color, $core-focus-opacity * $multiplier), rgba($color, $core-focus-opacity * $multiplier));
+    }
+    &:active {
+      background-color: if($overlay, transparentize($color, $core-pressed-overlay * $multiplier), rgba($color, $core-pressed-overlay * $multiplier));
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+}
+
+@mixin hover {
+  box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 3px 3px rgba(0,0,0,0.23);
+}
+
+@mixin position($top, $right: $top, $bottom: $top, $left: $right) {
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+
+@mixin Clickable {
+	user-select: none;
+	cursor: pointer;
+}
+
+@mixin NotClickable {
+	user-select: none;
+	pointer-events: none;
+}

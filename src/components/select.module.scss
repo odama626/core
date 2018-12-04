@@ -1,0 +1,101 @@
+.container {
+  display: inline-block;
+  // min-width: 300px;
+  position: relative;
+  
+  &:global(.open) {
+    z-index: 11;
+    input {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      
+    }
+    // &:hover {
+    //   input, .resultContainer {
+    //     box-shadow: $intense-shadow;
+    //   }
+    // }
+    .resultContainer {
+      opacity: 1;
+      transition: opacity ease 500ms 50ms, z-index ease 0ms 0ms;
+      // pointer-events: all;
+      z-index: 11;
+      .option {
+        pointer-events: all;
+      }
+    }
+  }
+    // &.error {
+
+    // }
+
+  input {
+    all: unset;
+    line-height: 36px;
+    padding: 0 16px;
+    font-size: 14px;
+    color: $font-primary;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: $font-secondary;
+    
+    height: 44px;
+    &:active, &:focus {
+      box-shadow: $intense-shadow;
+    }
+    background-color: white;
+    // border-radius: 4px;
+    border-radius: 26px;
+    box-shadow: $shadow;
+    display: inline-block;
+    box-shadow: $shadow;
+    transition: all ease 200ms;
+    &:hover {
+      box-shadow: $intense-shadow;
+    }
+  }
+}
+
+.resultContainer {
+  background-color: white;
+  box-shadow: $shadow;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity ease 150ms 0ms, z-index ease 10ms 200ms;
+  overflow: auto;
+  z-index: -10;
+  // pointer-events: none;
+  // z-index: 11;
+}
+
+.option {
+  display: flex;
+  padding: 0 16px;
+  user-select: none;
+  box-sizing: border-box;
+  pointer-events: none;
+  cursor: pointer;
+  line-height: 36px;
+  // justify-content: center;
+  width: 100%;
+  color: $font-secondary;
+  .icon {
+    margin-right: 0.25em;
+    width: 18px;
+  }
+  .icon, .label {
+    pointer-events: none;
+  }
+  &:hover {
+    background-color: rgba($core-primary, $core-hover-opacity);
+    color: $font-primary;
+  }
+}
