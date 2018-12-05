@@ -5,6 +5,7 @@ import sass from 'node-sass';
 import postcss from 'rollup-plugin-postcss-modules';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import { uglify } from 'rollup-plugin-uglify';
 
 
 const withTypescript = typescript({
@@ -46,7 +47,7 @@ const transformRequire = {
 }
 
 
-export default {
+export default [{
   input: 'src/components/index.ts',
   output: {
     file: 'lib/components.js',
@@ -55,7 +56,17 @@ export default {
     sourceMap: true,
     moduleName: 'core'
   },
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'classnames'],
   /// @ts-ignore ///
-  plugins: [withTypescript, transformRequire, postcss(withSassModules), ]
-}
+  plugins: [withTypescript, transformRequire, postcss(withSassModules)]
+}, {
+  input: 'src/utils.ts',
+  output: {
+    file: 'lib/utils.js',
+    format: 'es',
+    name: 'utils',
+    sourceMap: true,
+    moduleName: 'utils'
+  },
+  plugins: [withTypescript]
+}]

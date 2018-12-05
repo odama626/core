@@ -10,7 +10,7 @@ export const lock = () => {
   document.body.style.position = 'fixed';
   document.body.style.top = `-${scrollOffset}px`;
   document.body.style.width = '100%';
-  return () => {
+  return function() {
     document.body.style.overflow = overflow;
     document.body.style.position = position;
     document.body.style.top = top;
@@ -56,3 +56,37 @@ export const memoize = (fun, ...args) => {
     return fun(...args);
   }
 }
+
+type maybePath = ((string | number)[]) | string;
+
+function maybe(path: maybePath, obj: any, other: any = undefined) {
+  let p = typeof path === 'string' ? path.split('.') : path;
+  return p.reduce((result, next) => result && result[next] !== 'undefined' ? result[next] : undefined, obj) || other;
+}
+
+export function Maybe(obj: any, path?: maybePath, other: any = undefined) {
+  return path ? maybe(path, obj, other) : function (path, other: any = undefined) {
+    return maybe(path, obj, other);
+  }
+}
+
+// let a = {
+//   b: {
+//     c : 'Here'
+//   },
+//   c: {
+//     d: 'There'
+//   }
+// }
+
+// let m = Maybe(a);
+
+// m('b.c') //?
+// m('c.d') //?
+// m('b.c.d', 'Nope') //?
+// Maybe(a)('b.c') //?
+// Maybe(a)('c.d', 'Nope') //?
+// Maybe(a)('b.c.d', 'Nope'); //?
+// Maybe(a, 'b.c') //?
+// Maybe(a, 'c.d', 'Nope') //?
+// Maybe(a, 'b.c.d', 'Nope'); //?
