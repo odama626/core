@@ -51,7 +51,7 @@ export default [{
   input: 'src/components/index.ts',
   output: {
     file: 'lib/components.js',
-    format: 'es',
+    format: 'cjs',
     name: 'core',
     sourceMap: true,
     moduleName: 'core'
@@ -63,7 +63,7 @@ export default [{
   input: 'src/utils.ts',
   output: {
     file: 'lib/utils.js',
-    format: 'es',
+    format: 'cjs',
     name: 'utils',
     sourceMap: true,
     moduleName: 'utils'
